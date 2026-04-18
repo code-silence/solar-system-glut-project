@@ -66,3 +66,58 @@ void drawOrbits()
         drawCircleOutline(0, 0, r[i], 150);
 }
 // ================= ARNOB's PART END =================
+
+
+
+// ================= PIASH'S PART START =================
+#include <math.h>
+
+#define PI 3.14159265f
+#define D2R (PI/180.0f)
+
+typedef struct {
+    const char *name;
+    float orbitR, orbitSpd, selfSpd;
+    float radius;
+    float r,g,b;
+    float angle, selfAngle;
+    const char *diameter;
+    const char *distSun;
+    const char *orbPeriod;
+    const char *funFact;
+} Planet;
+
+Planet planets[6] = {
+{"Mercury",60,4.1,2,5,0.7,0.7,0.7,0,0,"4,879 km","57.9M km","88 days","Closest"},
+{"Venus",95,1.6,1.2,8,0.91,0.79,0.46,50,0,"12,104 km","108M km","225 days","Hottest"},
+{"Earth",135,1.0,1.5,9,0.27,0.55,0.90,90,0,"12,742 km","150M km","365 days","Home"},
+{"Mars",178,0.53,1.3,7,0.78,0.28,0.07,130,0,"6,779 km","228M km","687 days","Red"},
+{"Jupiter",240,0.08,1.8,20,0.80,0.58,0.25,170,0,"139,820 km","778M km","12 years","Biggest"},
+{"Saturn",305,0.03,1.0,16,0.90,0.83,0.55,210,0,"116,460 km","1.43B km","29 years","Rings"}
+};
+
+float moonAngle = 0;
+
+void drawPlanet(int i) {
+    Planet *p = &planets[i];
+    float x = p->orbitR*cosf(p->angle*D2R);
+    float y = p->orbitR*sinf(p->angle*D2R);
+
+    glColor3f(p->r,p->g,p->b);
+    drawCircle(x,y,p->radius,60);
+
+    glColor3f(1,1,1);
+    drawStr10(x+10,y+5,p->name);
+}
+
+void drawMoon() {
+    float ex = planets[2].orbitR*cosf(planets[2].angle*D2R);
+    float ey = planets[2].orbitR*sinf(planets[2].angle*D2R);
+
+    float mx = ex + 20*cosf(moonAngle*D2R);
+    float my = ey + 20*sinf(moonAngle*D2R);
+
+    glColor3f(0.7,0.7,0.7);
+    drawCircle(mx,my,3,20);
+}
+// ================= PIASH'S PART END =================
