@@ -121,3 +121,93 @@ void drawMoon() {
     drawCircle(mx,my,3,20);
 }
 // ================= PIASH'S PART END =================
+
+
+
+// ================= REDOWAN'S PART START =================
+
+
+
+
+
+
+
+
+
+// ================= REDOWAN'S PART END =================
+
+
+
+// ================= ALAWOL'S PART START =================
+
+#include <GL/glut.h>
+
+int winW=900, winH=650;
+int paused=0;
+int selectedPlanet=-1;
+
+float zoom=1, camX=0, camY=0;
+
+void display() {
+    glClear(GL_COLOR_BUFFER_BIT);
+    glLoadIdentity();
+
+    drawOrbits();
+    drawSun();
+
+    for(int i=0;i<6;i++) drawPlanet(i);
+    drawMoon();
+
+    drawHUD();
+    drawInfoPanel();
+
+    glutSwapBuffers();
+}
+
+void update(int v) {
+    if(!paused) {
+        for(int i=0;i<6;i++){
+            planets[i].angle += planets[i].orbitSpd;
+            planets[i].selfAngle += planets[i].selfSpd;
+        }
+        moonAngle += 10;
+    }
+    glutPostRedisplay();
+    glutTimerFunc(16,update,0);
+}
+
+void keyboard(unsigned char key,int x,int y){
+    if(key==27) exit(0);
+    if(key==' ') paused=!paused;
+}
+
+void mouse(int b,int s,int x,int y){
+    if(b==GLUT_LEFT_BUTTON && s==GLUT_DOWN){
+        selectedPlanet = (selectedPlanet+1)%6;
+    }
+}
+
+void reshape(int w,int h){
+    winW=w; winH=h;
+    glViewport(0,0,w,h);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluOrtho2D(-400,400,-300,300);
+    glMatrixMode(GL_MODELVIEW);
+}
+
+int main(int argc,char** argv){
+    glutInit(&argc,argv);
+    glutInitDisplayMode(GLUT_DOUBLE|GLUT_RGBA);
+    glutInitWindowSize(winW,winH);
+    glutCreateWindow("Solar System");
+
+    glutDisplayFunc(display);
+    glutKeyboardFunc(keyboard);
+    glutMouseFunc(mouse);
+    glutReshapeFunc(reshape);
+    glutTimerFunc(16,update,0);
+
+    glutMainLoop();
+}
+// ================= ALAWOL'S PART END =================
