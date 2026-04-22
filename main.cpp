@@ -9,20 +9,15 @@
 /* ================================================================
    SOLAR SYSTEM — OpenGL/GLUT Project
    Division of Work:
-     Person 1 : Global Setup, Planet Data & Drawing Helpers
-     Person 2 : Sun, Orbit Paths & Planet Rendering
-     Person 3 : Moon, Info Panel & HUD Overlay
-     Person 4 : Display Loop, Update Timer, Input & Main
+     Arnob : Global Setup, Planet Data & Drawing Helpers
+     Piash : Sun, Orbit Paths & Planet Rendering
+     Redwan : Moon, Info Panel & HUD Overlay
+     Nelu : Display Loop, Update Timer, Input & Main
    ================================================================ */
 
 
 /* ================================================================
-   PERSON 1 START
-   Responsibilities:
-     - Window & camera globals
-     - Simulation state variables
-     - Planet struct definition & data table
-     - Core drawing helper functions (drawCircle, drawStr, etc.)
+  Arnob START
    ================================================================ */
 
 /* ─── Window ──────────────────────────────────────── */
@@ -112,18 +107,12 @@ void drawStr18(float x, float y, const char *s) {
 }
 
 /* ================================================================
-   PERSON 1 END
+   Arnob END
    ================================================================ */
 
 
 /* ================================================================
-   PERSON 2 START
-   Responsibilities:
-     - drawSun()        : Render the central Sun
-     - drawOrbits()     : Render all 6 orbit path outlines
-     - drawPlanet()     : Render a planet with body, rotation stripe,
-                          Saturn rings, Jupiter band, selection ring,
-                          and name label
+   Piash START
    ================================================================ */
 
 /* Draws the Sun at the center with a label */
@@ -214,17 +203,13 @@ void drawPlanet(int idx) {
 }
 
 /* ================================================================
-   PERSON 2 END
+   piash END
    ================================================================ */
 
 
 /* ================================================================
-   PERSON 3 START
-   Responsibilities:
-     - drawMoon()      : Render the Moon orbiting Earth
-     - drawInfoPanel() : Render the planet info overlay panel
-                         (shown when a planet is selected by click)
-     - drawHUD()       : Render the top bar + zoom badge + follow indicator
+   Redwan START
+  
    ================================================================ */
 
 /* Draws Earth's Moon orbiting at a fixed radius around Earth's position */
@@ -357,26 +342,13 @@ void drawHUD() {
 }
 
 /* ================================================================
-   PERSON 3 END
+   Redwan END
    ================================================================ */
 
 
 /* ================================================================
-   PERSON 4 START
-   Responsibilities:
-     - display()    : Main render callback — composites all layers
-     - update()     : Timer callback advancing planet angles (~60 fps)
-     - mouseFunc()  : Handles scroll zoom and left-click planet picking
-     - keyboard()   : Handles SPACE/F/R/ESC key commands
-     - reshape()    : Handles window resize, updates viewport & projection
-     - main()       : Initializes GLUT, sets up OpenGL state, registers
-                      all callbacks, and starts the main loop
+   Alawol START
    ================================================================ */
-
-/* Main display callback — called every frame.
-   Renders in order: orbits → sun → Saturn back ring → planets → moon → HUD → info panel
-   Saturn's back ring is drawn before planets so it appears behind the body.
-*/
 void display() {
     glClear(GL_COLOR_BUFFER_BIT);
     glLoadIdentity();
@@ -538,5 +510,5 @@ int main(int argc, char **argv) {
 }
 
 /* ================================================================
-   PERSON 4 END
+   Alawol END
    ================================================================ */
