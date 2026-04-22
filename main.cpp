@@ -127,10 +127,30 @@ void drawMoon() {
 // ================= REDOWAN'S PART START =================
 
 
+#include <stdio.h>
 
+extern int winW, winH;
+extern int selectedPlanet;
 
+void drawHUD() {
+    glColor3f(0.5,0.8,1);
+    glRasterPos2f(-380,280);
+    const char *t = "SPACE=pause  F=follow  R=reset  Click=info  Scroll=zoom";
+    for (;*t;t++) glutBitmapCharacter(GLUT_BITMAP_HELVETICA_12,*t);
+}
 
+void drawInfoPanel() {
+    if (selectedPlanet < 0) return;
 
+    Planet *p = &planets[selectedPlanet];
+
+    glColor3f(0.1,0.1,0.2);
+    drawStr12(200,200,p->name);
+    drawStr10(200,180,p->diameter);
+    drawStr10(200,160,p->distSun);
+    drawStr10(200,140,p->orbPeriod);
+    drawStr10(200,120,p->funFact);
+}
 
 
 
